@@ -1,10 +1,10 @@
-// get current time and place clock hands accordingly
-// rotate hands every second
+const currentTime = new Date();
 
-var hourHandAngle = 90;
-var minuteHandAngle = 90;
-var secondHandAngle = 90;
+var hourHandAngle = getAngle(currentTime, 'hour');
+var minuteHandAngle = getAngle(currentTime, 'minute');
+var secondHandAngle =getAngle(currentTime, 'second');
 
+// Degree increment out of 360 each second by hour, minute, and second
 const hourHandIncrement = 8 / 1000;
 const minuteHandIncrement = 1 / 10;
 const secondHandIncrement = 6;
@@ -12,6 +12,10 @@ const secondHandIncrement = 6;
 const hourHand = document.querySelector('.hour-hand')
 const minuteHand = document.querySelector('.min-hand')
 const secondHand = document.querySelector('.second-hand');
+
+console.log('hour angle: ' + hourHandAngle);
+console.log('minute angle: ' + minuteHandAngle);
+console.log('second angle: '+ secondHandAngle);
 
 (function rotateHands() {
   hourHandAngle = getDegreeRotation(hourHandAngle, hourHandIncrement);
@@ -31,4 +35,16 @@ function getDegreeRotation(angle, increment) {
 
 function rotateHand(hand, angle) {
   return hand.style.transform = `rotate(${angle}deg)`;
+}
+
+function getAngle(currentTime, angleType) {
+  if (angleType === 'hour') {
+    return currentTime.getHours() / 24 * 360
+  }
+  else if (angleType === 'minute') {
+    return currentTime.getMinutes() / 60 * 360;
+  }
+  else {
+    return currentTime.getSeconds() / 60 * 360;
+  }
 }
