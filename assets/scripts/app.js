@@ -1,3 +1,7 @@
+/*
+====== Variable Declarations ======
+*/
+
 const currentTime = new Date();
 
 var hourHandAngle = getAngle(currentTime, 'hour');
@@ -13,29 +17,9 @@ const hourHand = document.querySelector('.hour-hand')
 const minuteHand = document.querySelector('.min-hand')
 const secondHand = document.querySelector('.second-hand');
 
-console.log('hour angle: ' + hourHandAngle);
-console.log('minute angle: ' + minuteHandAngle);
-console.log('second angle: '+ secondHandAngle);
-
-(function rotateHands() {
-  hourHandAngle = getDegreeRotation(hourHandAngle, hourHandIncrement);
-  minuteHandAngle = getDegreeRotation(minuteHandAngle, minuteHandIncrement);
-  secondHandAngle = getDegreeRotation(secondHandAngle, secondHandIncrement);
-
-  rotateHand(hourHand, hourHandAngle);
-  rotateHand(minuteHand, minuteHandAngle);
-  rotateHand(secondHand, secondHandAngle);
-
-  setTimeout(rotateHands, 1000);
-})();
-
-function getDegreeRotation(angle, increment) {
-  return angle + increment;
-}
-
-function rotateHand(hand, angle) {
-  return hand.style.transform = `rotate(${angle}deg)`;
-}
+/*
+======= Functions =======
+*/
 
 function getAngle(currentTime, angleType) {
   if (angleType === 'hour') {
@@ -48,3 +32,24 @@ function getAngle(currentTime, angleType) {
     return currentTime.getSeconds() / 60 * 360;
   }
 }
+
+
+function rotateHand(hand, angle) {
+  return hand.style.transform = `rotate(${angle}deg)`;
+}
+
+function getDegreeRotation(angle, increment) {
+  return angle + increment;
+}
+
+(function rotateHands() {
+  hourHandAngle = getDegreeRotation(hourHandAngle, hourHandIncrement);
+  minuteHandAngle = getDegreeRotation(minuteHandAngle, minuteHandIncrement);
+  secondHandAngle = getDegreeRotation(secondHandAngle, secondHandIncrement);
+
+  rotateHand(hourHand, hourHandAngle);
+  rotateHand(minuteHand, minuteHandAngle);
+  rotateHand(secondHand, secondHandAngle);
+
+  setTimeout(rotateHands, 1000);
+})();
