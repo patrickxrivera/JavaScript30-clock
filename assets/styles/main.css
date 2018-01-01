@@ -38,8 +38,11 @@ body {
 
 .hand {
   width: 50%;
-  height: 6px;
+  height: 3px;
   background: black;
   position: absolute;
   top: 50%;
+  transform-origin: 100%;
+  transform: rotate(90deg);
+  transition: all 0.5s ease-in-out;
 }
